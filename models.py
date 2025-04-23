@@ -37,6 +37,7 @@ class Store(db.Model):
     store_review = db.Column(db.Float, nullable=False, default=0.0)
     store_location_longitude = db.Column(db.Float, nullable=False)
     store_location_latitude = db.Column(db.Float, nullable=False)
+    store_description = db.Column(db.String, nullable=True)
 
     def toMap(self):
         return {
@@ -45,7 +46,8 @@ class Store(db.Model):
             "store_image": self.store_image,
             "store_review": self.store_review,
             "store_location_longitude": self.store_location_longitude,
-            "store_location_latitude": self.store_location_latitude
+            "store_location_latitude": self.store_location_latitude,
+            "store_description": self.store_description
         }
     
 

@@ -117,7 +117,7 @@ def register_routes(app, db):
 ###########################################################
 ###########image getter####################################
 ###########################################################
-    @app.route("/https://prod.liveshare.vsengsaas.visualstudio.com/join?FBD6455701135B6CB19B0349D7CEB79C4FB1", methods=['GET'])
+    @app.route("/DEFAULT_PROFILE_IMAGE", methods=['GET'])
     def get_default_image():
         # Read the default image file
         with open('DEFAULT_PROFILE_IMAGE.jpg', 'rb') as f:
@@ -338,7 +338,9 @@ def register_routes(app, db):
             store_name=data['store_name'],
             store_review=data['store_review'],
             store_location_longitude=data['store_location_longitude'],
-            store_location_latitude=data['store_location_latitude']
+            store_location_latitude=data['store_location_latitude'],
+            store_description=data['store_description'] 
+
         )
         if 'store_img' in request.files:
             store_img = request.files['store_img']
@@ -361,6 +363,8 @@ def register_routes(app, db):
         store.store_review = data.get('store_review', store.store_review)
         store.store_location_longitude = data.get('store_location_longitude', store.store_location_longitude)
         store.store_location_latitude = data.get('store_location_latitude', store.store_location_latitude)
+        store.store_description = data.get('store_description', store.store_description)  
+
 
         if 'store_img' in request.files:
             store_img = request.files['store_img']
