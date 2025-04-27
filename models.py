@@ -51,9 +51,37 @@ class Store(db.Model):
         }
     
 
+# remove this class later
 class StudentStoresRelation(db.Model):
     id = db.Column(db.Integer, primary_key=True, unique=True)
     studentid=db.Column(db.Integer)
     storeid = db.Column(db.Integer)
 
-    
+class Item(db.Model):
+    __tablename__ = 'item'
+    product_id = db.Column(db.Integer, primary_key=True, unique=True)
+    product_name = db.Column(db.String, nullable=False)
+    product_image = db.Column(db.LargeBinary, nullable=True)
+    product_price = db.Column(db.Float, nullable=False)
+    product_description = db.Column(db.String, nullable=True)
+
+    def toMap(self):
+        return {
+            "product_id": self.product_id,
+            "product_name": self.product_name,
+            "product_image": self.product_image,
+            "product_price": self.product_price,
+            "product_description": self.product_description
+        }
+
+class StoreItemRelation(db.Model):
+    __tablename__ = 'store_item_relation'
+    id = db.Column(db.Integer, primary_key=True, unique=True)
+    store_id = db.Column(db.Integer, db.ForeignKey('store.store_id'), nullable=False)
+    product_id = db.Column(db.Integer, db.ForeignKey('item.product_id'), nullable=False)
+
+    def toMap(self):
+        return {
+            "store_id": self.store_id,
+            "product_id": self.product_id
+        }
