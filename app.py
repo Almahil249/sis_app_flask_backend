@@ -10,7 +10,7 @@ db = SQLAlchemy()
 def create_app():
     app = Flask(__name__)
 
-    app.config['SQLALCHEMY_DATABASE_URI'] = DB_URI
+    app.config['SQLALCHEMY_DATABASE_URI'] = process.env.DB_URL
 
     app.secret_key = 'SOME KEY'
     
